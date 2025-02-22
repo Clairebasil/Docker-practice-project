@@ -1,4 +1,4 @@
-FROM node:18-bullseye as builder
+FROM node:12-alpine
 
 WORKDIR /var/www/
 

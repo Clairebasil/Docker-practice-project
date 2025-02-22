@@ -1,4 +1,4 @@
-version: '3'
+# version: '3'
 
 services:
   api:
@@ -8,19 +8,19 @@ services:
     depends_on:
       - postgres
     ports:
-      - '${PORT}:${PORT}'
+      - 3000:3000
     env_file:
       - .env
     environment:
       - PORT=${PORT}
-      - DB_USER=root
-      - DB_NAME=sootchy
+      - DB_USER=postgres
+      - DB_NAME=stoic_elgamal
       - DB_PORT=5432
-      - DB_PASS=toor
+      - DB_PASS=password
       - DB_HOST=postgres
       - JWT_SECRET=c300bea63c334c543b122061ce3efe838d47fbee793f31b8b965537ba02dd47e0bc7540317d55f1f43af48e0a8805d6d61ca09bdb5a15380cf95c1db14605e85
-      - JWT_ISSUER=sootchy.com
-      - JWT_AUDIENCE=sootchy.com
+      - JWT_ISSUER=stoic_elgamal.com
+      - JWT_AUDIENCE=stoic_elgamal.com
       - JWT_EXPIRES_IN=1h
       - JWT_ALGORITHM=HS256
       - JWT_REFRESH_EXPIRES_IN=7d
@@ -32,11 +32,11 @@ services:
     image: postgres:12-alpine
     container_name: api-db
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=toor
-      - POSTGRES_DB=sootchy
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=stoic_elgamal
     ports:
-      - 5433:5432
+      - 5432:5432
     volumes:
       - ./docker-db/scripts/db:/scripts
     healthcheck:
