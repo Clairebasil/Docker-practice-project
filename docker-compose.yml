@@ -1,41 +1,31 @@
 # version: '3'
 
 services:
-  api:
+  node-app:
     build:
       context: .
     container_name: api
     depends_on:
       - postgres
     ports:
-      - 3000:3000
+      - 5002:3000
     env_file:
       - .env
-    environment:
-      - PORT=${PORT}
-      - DB_USER=
-      - DB_PORT=
-      - DB_PASS=
-      - DB_HOST=
-      - JWT_SECRET=
-      - JWT_ISSUER=
-      - JWT_AUDIENCE=
-      - JWT_EXPIRES_IN=1h
-      - JWT_ALGORITHM=HS256
-      - JWT_REFRESH_EXPIRES_IN=7d
+    networks:
+      - alt-sch-network
     volumes:
       - .:/var/www/
 
   postgres:
     restart: always
-    image: postgres:12-alpine
+    image: postgres
     container_name: api-db
     environment:
-      - POSTGRES_USER=
-      - POSTGRES_PASSWORD=
-      - POSTGRES_DB=
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=stoic_elgamal
     ports:
-      - 5432:5432
+      - 5030:5432
     volumes:
       - ./docker-db/scripts/db:/scripts
     healthcheck:
@@ -43,3 +33,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - alt-sch-network
+  
+networks:
+ alt-sch-network:

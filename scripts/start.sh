@@ -8,7 +8,7 @@ npm run migration:run
 echo "Database Migration Successful ✅!"
 
 echo "Running seeders...⛓⚙️"
-#npm run db:seed
+npm run db:seed
 echo "Database Seeders ✅"
 
 npm uninstall bcrypt
