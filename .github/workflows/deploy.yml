@@ -2,7 +2,7 @@ name: Deployment to EC2 server
 on:
   push:
     branches:
-      # - main
+      - main
       # - "feat/**"
       - develop
 
